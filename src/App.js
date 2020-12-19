@@ -8,6 +8,7 @@ import { useState } from "react";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import Customer from "./Components/Customer/Customer";
 import ServiceList from "./Components/Service/ServiceList";
+import Reviews from "./Components/Order/Reviews";
 
 
 export const UserContext = createContext();
@@ -33,8 +34,12 @@ function App() {
           <PrivateRoute path="/customer">
           <Customer/>
           </PrivateRoute>
-          <Route  path="/customer/service">
+          <Route  path="/service">
             <ServiceList/>
+           
+          </Route>
+          <Route  path="/reviews">
+            <Reviews/>
            
           </Route>
           <Route exact path="/">

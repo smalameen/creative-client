@@ -14,7 +14,7 @@ const Login = () => {
 
   const history = useHistory();
   const location = useLocation();
-  const { from } = location.state || { from: { pathname: '/auth' } };
+  const { from } = location.state || { from: { pathname: `/auth` } };
 
   if (firebase.apps.length === 0) {
     firebase.initializeApp(firebaseConfig);
@@ -29,8 +29,10 @@ const Login = () => {
         const { displayName, email } = result.user;
         const signedInUser = { name: displayName, email };
         setLoggedInUser(signedInUser);
+
         history.replace(from);
-        sessionStorage.setItem('token', signedInUser.user);
+        storeToken();
+        
         return signedInUser;
       })
       .catch(function (error) {
@@ -38,6 +40,15 @@ const Login = () => {
         console.log(errorMessage);
       });
   };
+
+
+  const storeToken =()=>{
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      sessionStorage.setItem('token',idToken);
+    }).catch(function(error) {
+      // Handle error
+    });
+  }
   return (
     
 <section className="mt-5 p-1">

@@ -4,13 +4,21 @@ import { useHistory } from 'react-router-dom';
 
 const ServiceList = () => {
    
-    const history = useHistory();
+  const historyOrder = useHistory();
 
-    const handleServiceButton = () => {
-      
-      const url = `/customer/service`;
-      history.push(url);
-    };
+  const handleOrderButton = () => {
+    
+    const url = `/customer`;
+    historyOrder.push(url);
+  };
+
+  const historyReviews = useHistory();
+
+  const handleReviewsButton = () => {
+    
+    const url = `/reviews`;
+    historyReviews.push(url);
+  };
 
 
     return (
@@ -18,22 +26,31 @@ const ServiceList = () => {
       <Navbar style={{ height: "4rem" }} className="bg-light"></Navbar>
       <div className="row">
         <div
-          className="col-md-3 col-sm-12 bg-light align-middle"
+          className="col-md-3 col-sm-3 bg-light align-middle"
           style={{ height: "100vh" }}
         >
-          <button style={{ border: "none", background: "none" }}>Order</button>{" "}
+          <button onClick={()=>handleOrderButton()} style={{ border: "none", background: "none" }}>Order</button>{" "}
           <br />
-          <button onClick={() => handleServiceButton()} style={{ border: "none", background: "none" }}>
+          <button style={{ border: "none", background: "none" }}>
             Service lits
           </button>
           <br />
-          <button style={{ border: "none", background: "none" }}>
+          <button onClick={()=>handleReviewsButton()}  style={{ border: "none", background: "none" }}>
             Review
           </button>{" "}
           <br />
         </div>
-        <div className="col-md-8 col-sm-12" style={{backgroundColor:"#c3fddd"}}>
-
+        <div
+          style={{
+            backgroundColor: " #c3fddd",
+            width: "100%",
+            height: "100vh",
+            padding: "15px",
+          }}
+          className="col-md-8 col-sm-12"
+        >
+         
+         <h1>I am here</h1>
         </div>
         
         </div>
