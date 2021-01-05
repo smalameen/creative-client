@@ -10,7 +10,7 @@ import ServiceList from "./Components/Service/ServiceList";
 import Reviews from "./Components/Service/Reviews";
 // import AddCourse from "./Components/AddCourse/AddCourse";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AddCourse from "./Components/AddCourse/AddCourse";
+import NewCourse from "./Components/NewCourse/NewCourse";
 
 export const UserContext = createContext();
 
@@ -53,8 +53,8 @@ function App() {
            
           </Route >
 
-          <Route  path="/addCourse">
-            <AddCourse/>
+          <Route  path="/newCourse">
+            <NewCourse />
           </Route>
 
             <Route  path="/review">
