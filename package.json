@@ -14,10 +14,12 @@
     "react-bootstrap": "^1.3.0",
     "react-carousel-with-thumbnail": "^1.4.0",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.14.0",
     "react-id-swiper": "^4.0.0",
     "react-responsive-carousel": "^3.2.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-super-responsive-table": "^5.2.0",
     "swiper": "^6.3.3"
   },
   "scripts": {

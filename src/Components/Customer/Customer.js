@@ -1,9 +1,28 @@
 import React from "react";
 import { Button, Form, Navbar } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const Customer = () => {
-
+  const { register, handleSubmit, watch, errors } = useForm();
+  const onSubmit = data => {
+    fetch(`http://localhost:5001/userData`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(data)
+  
+    })
+  
+    .then(res => res.json())
+    .then(success =>{
+      alert("Are you sure to send data");
+      handleServiceButton();
+      console.log(success)
+    });
+  }
+  
 
   const historyService = useHistory();
 
@@ -32,21 +51,9 @@ const Customer = () => {
   };
 
 
-  const injectDataToServer = data => {
-    fetch(`http://localhost:5000/injectData`,{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(data)
-
-    })
-
-    .then(res => res.json())
-    .then(success =>{
-      console.log("kew na")
-    })
-  }
+  // const insertUserData = data => {
+    
+  // }
 
   return (
     <div>
@@ -80,45 +87,25 @@ const Customer = () => {
           }}
           className="col-md-8 col-sm-12"
         >
-          <Form.Control id="input"
-            style={{ height: "50px", width: "100%" }}
-            type="text"
-            placeholder="Company Name"
-          />{" "}
-          <br />
-          <Form.Control id="input"
-            style={{ height: "50px", width: "100%" }}
-            type="text"
-            placeholder="Your Email"
-          />{" "}
-          <br />
-          <Form.Control id="input"
-            style={{ height: "50px", width: "100%" }}
-            type="text"
-            placeholder="Graphic Deign"
-          />{" "}
-          <br />
-          <Form.Control id="input"
-            style={{ height: "100px", width: "100%" }}
-            type="text"
-            placeholder="Your message"
-          />{" "}
-          <br />
-          <div className="d-flex">
-            <Form.Control id="input"
-              style={{ height: "50px", width: "100%" }}
-              type="text"
-              placeholder="Price"
-            />
-            <Form.Control id="input"
-              style={{ height: "50px", width: "100%", marginLeft: "5px" }}
-              type="file"
-            />
-          </div>{" "}
-          <br />
-          <Button type="submit" onClick={()=>injectDataToServer()} style={{ backgroundColor: "#111430", width: "7rem" }}>
-            Send
-          </Button>
+          
+          <form onSubmit={handleSubmit(onSubmit)}>
+      <input type="text" style={{ height: "50px", width: "100%", border:"none", borderRadius:"10px" }} name="name" placeholder="Please Enter your name" ref={register} /> <br/> <br/>
+
+      <input type="email" style={{ height: "50px", width: "100%", border:"none", borderRadius:"10px" }} name="email" placeholder="Please Enter your email" ref={register} /> <br/> <br/>
+
+      
+      <input type="text" style={{ height: "50px", width: "100%", border:"none", borderRadius:"10px" }} name="course" placeholder="Enter Your course name" ref={register({ required: true })} /> <br/> <br/>
+      
+      <input type="text" style={{ height: "100px", width: "100%", border:"none", borderRadius:"10px" }} name="address" placeholder="Enter Your Address" ref={register({ required: true })} /> <br/> <br/>
+
+      <div className="d-flex">
+      <input type="number" style={{ height: "50px", width: "50%", border:"none", borderRadius:"10px" }} name="phone" placeholder="Enter Your phone number" ref={register({ required: true })} /> <br/> <br/>
+
+<input className="ml-1" type="number" style={{ height: "50px", width: "50%", border:"none", borderRadius:"10px" }} name="zip" placeholder="Enter Your zip code" ref={register({ required: true })} /> <br/> <br/>
+      </div>
+      <br/> 
+      <input style={{ backgroundColor: "#111430", width:"7rem", color:"white", borderRadius:"1rem", border:"none" }} type="submit" />
+    </form>
         </div>
       </div>
     </div>
