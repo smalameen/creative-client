@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import ShowSkills from "./ShowSkills";
 
 var skillUp = [
   {
@@ -24,6 +26,21 @@ var skillUp = [
 ];
 
 const SkillUp = () => {
+
+  const [data, setData] = useState([]);
+  console.log(data)
+ 
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        'http://localhost:5001/newCourses',
+      );
+ 
+      setData(result.data);
+    };
+ 
+    fetchData();
+  }, []);
   return (
     
       <div className="container" style={{ textAlign: "center" }}>
@@ -35,23 +52,8 @@ const SkillUp = () => {
       </h3>
 
       <div className="container row col-sm-12 d-flex justify-content-center mt-2 ml-2">
-        {skillUp.map((skill) => (
-          <Card
-            style={{
-              width: "18rem",
-              alignItems: "center",
-              align: "center",
-              padding: "20px",
-              marginLeft: "20px",
-              marginTop: "1rem",
-            }}
-          >
-           <Link to="/customer"> <Image style={{ height: "50px", width: "50px" }} src={skill.img} />  </Link>
-            <Card.Body>
-              <Card.Title>{skill.title}</Card.Title>
-              <Card.Text>{skill.text}</Card.Text>
-            </Card.Body>
-          </Card>
+        {data.map((skill) => (
+          <ShowSkills skill={skill}></ShowSkills>
         ))}
       </div>
     </div>

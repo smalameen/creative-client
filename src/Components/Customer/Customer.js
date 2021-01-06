@@ -2,8 +2,15 @@ import React from "react";
 import { Button, Form, Navbar } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import order from "../../images/order.png";
+import list from "../../list.jpg";
+import reviews from "../../review.jpg";
+import { useContext } from "react";
+import { UserContext } from "../../App";
 
 const Customer = () => {
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = data => {
     fetch(`http://localhost:5001/userData`,{
@@ -35,7 +42,7 @@ const Customer = () => {
 
   const historyOrder = useHistory();
 
-  const handleOrderButton = () => {
+  const handleAddCourseButton = () => {
     
     const url = `/customer`;
     historyOrder.push(url);
@@ -44,44 +51,53 @@ const Customer = () => {
 
   const historyReviews = useHistory();
 
-  const handleReviewsButton = () => {
+  const handleOrderButton = () => {
     
     const url = `/reviews`;
     historyReviews.push(url);
   };
+  
 
-
+  
   // const insertUserData = data => {
     
   // }
 
   return (
     <div>
-      <Navbar style={{ height: "4rem" }} className="bg-light">
-        <ul>
-          <li>Facebook</li>
-        </ul>
+      <div >
+      <Navbar
+        className="d-flex justify-align-content-right bg-light"
+        style={{ height: '4rem' }}
+      >
+        <button onClick={()=>handleAddCourseButton()} className="ml-1 bg-light" style={{border:"none", backgroundColor:"white"}}>Add Course</button>
+        <button className="ml-1 bg-light"  style={{border:"none", backgroundColor:"white"}}>Home</button>
+        <button onClick={()=>handleOrderButton()} className="ml-1 bg-light"  style={{border:"none", backgroundColor:"white"}}>Order</button>
+        <img style={{height:"2rem", width:"2rem"}} src={loggedInUser.photoURL} alt=""/>
       </Navbar>
-      <div className="row">
-        <div
-          className="col-md-3 col-sm-12 bg-light align-middle"
-          style={{ height: "100vh" }}
-        >
-          <button onClick={()=>handleOrderButton()} style={{ border: "none", background: "none" }}>Order</button>{" "}
-          <br />
-          <button  onClick={()=> handleServiceButton()} style={{ border: "none", background: "none" }}>
-           Service lits
-          </button>
-          <br />
-          <button onClick={()=>handleReviewsButton()} style={{ border: "none", background: "none" }}>
-            Review
-          </button>
-          <br />
-        </div>
+      </div>
+      <div  className="row">
+      <div
+            className="col-md-3 col-sm-12 bg-light align-middle"
+            style={{ height: "10rem" }}
+          >
+           <img style={{height:"1.5rem", width:"1.5rem"}} src={order} alt=""/> 
+           <button onClick={()=>handleOrderButton()} style={{ border: "none", background: "none" }}>Order</button>
+            <br />
+            <img  style={{height:"1.5rem", width:"1.5rem"}} src={list} alt=""/>  <button onClick={() => handleServiceButton()} style={{ border: "none", background: "none" }}>
+             Service lits
+            </button>
+            <br />
+            <img style={{height:"1.5rem", width:"2rem"}} src={reviews} alt=""/>  <button style={{ border: "none", background: "none" }}>
+              Review
+            </button>
+            <br />
+          </div>
         <div
           style={{
             backgroundColor: " #c3fddd",
             width: "100%",
+           
             height: "100vh",
             padding: "15px",
           }}

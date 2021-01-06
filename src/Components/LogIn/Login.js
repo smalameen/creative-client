@@ -8,8 +8,11 @@ import { useContext } from "react";
 import firebaseConfig from "./firebase.Config";
 import google from "./google.png";
 import creative from "../../images/logos/logo.png"
+import HooksFrom from "./HooksFrom";
 
 const Login = () => {
+
+  
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
   const history = useHistory();
@@ -26,8 +29,9 @@ const Login = () => {
       .auth()
       .signInWithPopup(provider)
       .then(function (result) {
-        const { displayName, email } = result.user;
-        const signedInUser = { name: displayName, email };
+        const { displayName, email, photoURL } = result.user;
+        console.log(result);
+        const signedInUser = { name: displayName, email, photoURL };
         setLoggedInUser(signedInUser);
 
         history.replace(from);
@@ -45,6 +49,7 @@ const Login = () => {
   const storeToken =()=>{
     firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
       sessionStorage.setItem('token',idToken);
+      sessionStorage.setLoggedInUser('emails', loggedInUser.emails)
     }).catch(function(error) {
       // Handle error
     });
@@ -62,11 +67,12 @@ const Login = () => {
 
       <div className="d-flex justify-content-center mt-3">
       
-      <Card style={{ width: "25rem", height: "18rem", align:"center", border:"1px solid gray"}}>
+      <Card style={{ width: "25rem", height: "30rem", align:"center", border:"1px solid gray"}}>
       
         <Card.Body>
+        <HooksFrom/>
+
           <div className="d-flex align-items-center ml-4 mt-5 p-1" style={{ height: "3rem", width: "18rem", borderRadius:"2rem", backgroundColor:"white", border:"1px solid gray" }}>
-            
             <img
               style={{ width: "2rem", height: "2rem", marginRight:"2rem", marginLeft:"5px" }}
               src={google}

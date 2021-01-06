@@ -3,10 +3,13 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { Button, Nav } from 'react-bootstrap'
 import { Navbar } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Reviews from './Reviews'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
+import order from "../../images/order.png";
+import list from "../../list.jpg";
+import reviews from "../../review.jpg";
 
 const ServiceList = (props) => {
   const { loggInUser, setLoggedInUser } = props
@@ -22,8 +25,8 @@ const ServiceList = (props) => {
 
   const historyReviews = useHistory()
 
-  const handleReviewsButton = () => {
-    const url = ``
+  const handleAddCourseButton = () => {
+    const url = `/newCourse`
     historyReviews.push(url)
   }
 
@@ -41,37 +44,33 @@ const ServiceList = (props) => {
   // .then(data => console.log(data))
 
   return (
-    <div>
+    <div className="justify-content-center">
       <Navbar
         className="d-flex justify-align-content-right bg-light"
         style={{ height: '4rem' }}
       >
-        <Nav.Link>Add Course</Nav.Link>
-        <Nav.Link to="/facebook">Admin</Nav.Link>
-        <Nav.Link to="/facebook">Home</Nav.Link>
+        <button onClick={()=>handleAddCourseButton()} className="ml-1 bg-light" style={{border:"none", backgroundColor:"white"}}>Add Course</button>
+        <button className="ml-1 bg-light"  style={{border:"none", backgroundColor:"white"}}>Home</button>
+        <button onClick={()=>handleOrderButton()} className="ml-1 bg-light"  style={{border:"none", backgroundColor:"white"}}>Order</button>
         <p className="font-weight-bold"> {loggInUser.email}</p>
       </Navbar>
       <div className="row">
-        <div className="col-md-3 col-sm-3 bg-light align-middle">
-          <button
-            onClick={() => handleOrderButton()}
-            style={{ border: 'none', background: 'none' }}
+      <div
+            className="col-md-3 col-sm-12 bg-light align-middle"
+            style={{ height: "10rem" }}
           >
-            Order
-          </button>{' '}
-          <br />
-          <button style={{ border: 'none', background: 'none' }}>
-            Service lits
-          </button>
-          <br />
-          <button
-            onClick={() => handleReviewsButton()}
-            style={{ border: 'none', background: 'none' }}
-          >
-            Review
-          </button>{' '}
-          <br />
-        </div>
+           <img style={{height:"1.5rem", width:"1.5rem"}} src={order} alt=""/> 
+           <button onClick={()=>handleOrderButton()} style={{ border: "none", background: "none" }}>Order</button>
+            <br />
+            <img style={{height:"1.5rem", width:"1.5rem"}} src={list} alt=""/>  <button  style={{ border: "none", background: "none" }}>
+             Service lits
+            </button>
+            <br />
+            <img style={{height:"1.5rem", width:"1.5rem"}} src={reviews} alt=""/>  <button style={{ border: "none", background: "none" }}>
+              Review
+            </button>
+            <br />
+          </div>
         <div
           style={{
             backgroundColor: ' #c3fddd',

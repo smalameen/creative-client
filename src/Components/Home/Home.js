@@ -1,4 +1,5 @@
 import React from "react";
+import Brands from "./Brands/Brands";
 import Carousels from "./Carousel/Carousels";
 import Clients from "./clients/Clients";
 import Footer from "./Footer/Footer";
@@ -11,6 +12,7 @@ const Home = () => {
     <div>
       
         <HeaderAndHire/>
+        <Brands/>
         <SkillUp/>
         <Carousels/>
         <Clients/>
